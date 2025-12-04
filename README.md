@@ -1,11 +1,10 @@
+
 ---
 
-# 🛡️ **Face Tracking Pan–Tilt System**
-
-### Real-Time Head Tracking with Python, OpenCV, MediaPipe & Arduino
+# 🛰️ **Face Tracking Pan–Tilt System**
 
 **Author:** Benayas Wondwosen (Benu)
-**Company:** Nafiyas Solution
+**Company:** Nafiyas Solution – Smart Automation & Robotics
 
 ![Project Banner](https://img.shields.io/badge/Face_Tracking-Pan-Tilt-blue?style=for-the-badge)
 ![Python](https://img.shields.io/badge/Python-3.11-green?style=flat-square)
@@ -15,44 +14,43 @@
 
 ---
 
-## 📌 **Project Overview**
+## 💡 **About the Project**
 
-The **Face Tracking Pan–Tilt System** is a **smart, real-time servo system** that follows a person’s face using computer vision.
+The **Face Tracking Pan–Tilt System** is a **cutting-edge AI robotics project** that moves servos in real time to follow a person’s face.
 
 It combines:
 
-* **Python + OpenCV** – for camera capture and frame processing
-* **MediaPipe Face Mesh** – for accurate face landmark detection
-* **Arduino** – to control servos (X & Y axes)
+* **Computer Vision:** Python + OpenCV captures frames
+* **AI Detection:** MediaPipe Face Mesh accurately detects face landmarks
+* **Hardware Control:** Arduino drives X/Y servo motors for smooth pan and tilt
 
 **Applications:**
 
-* Robotics projects
-* Smart surveillance cameras
-* Jarvis-style interactive displays
-* Educational purposes in embedded systems and AI
+* Smart cameras & surveillance
+* Educational robotics
+* Jarvis-style interactive assistants
+* Personal & research projects
 
 ---
 
-## ⚡ **Key Features**
+## 🏆 **Features**
 
-* ✅ Smooth real-time head tracking
-* ✅ Nose-centered alignment for precision
-* ✅ Fast jump response for quick movements
-* ✅ Adjustable gain and smoothing factors
-* ✅ Full 0°–180° servo range
-* ✅ Modular Python-Arduino integration
-* ✅ Lightweight and easy to extend
+* 🎯 Real-time face tracking
+* 🔄 Smooth servo movement with adjustable smoothing factor
+* ⚡ Fast jump response for quick head movement
+* ✅ Nose-centered tracking for precision
+* 🖥️ Lightweight and easy to run
+* 💻 Modular Python-Arduino design
 
 ---
 
-## 🧰 **Hardware Requirements**
+## 🛠️ **Hardware Used**
 
 * Arduino Uno / Nano
 * 2x SG90 / MG90S servo motors
-* Pan–tilt servo bracket
+* Pan–tilt bracket
 * USB cable
-* Computer with Python 3.x and webcam
+* Computer with Python 3.x + webcam
 
 ---
 
@@ -60,14 +58,14 @@ It combines:
 
 | Component      | Arduino Pin |
 | -------------- | ----------- |
-| Servo X (pan)  | 9           |
-| Servo Y (tilt) | 10          |
+| Servo X (Pan)  | 9           |
+| Servo Y (Tilt) | 10          |
 | GND            | GND         |
 | +5V            | 5V          |
 
 ---
 
-## 🛠️ **Software Requirements**
+## 🧰 **Software Requirements**
 
 * Python 3.x
 * Libraries: OpenCV, MediaPipe, PySerial, NumPy
@@ -78,7 +76,7 @@ Install dependencies:
 pip install opencv-python mediapipe pyserial numpy
 ```
 
-Or:
+Or via:
 
 ```bash
 pip install -r requirements.txt
@@ -86,30 +84,30 @@ pip install -r requirements.txt
 
 ---
 
-## ▶️ **Usage Instructions**
+## ▶️ **How to Run**
 
-1. Upload `servo_controller.ino` to Arduino.
-2. Connect Arduino to your PC via USB.
+1. Upload `servo_controller.ino` to Arduino
+2. Connect Arduino to PC via USB
 3. Run Python script:
 
 ```bash
 python python/face_tracker.py
 ```
 
-4. The servos will follow your face in real time.
-5. Press `q` to exit the program.
+4. Move your head — servos will follow smoothly
+5. Press `q` to quit
 
 ---
 
 ## 🧠 **How It Works**
 
-1. Webcam captures frame
-2. MediaPipe detects face landmarks
-3. Nose tip (landmark index 1) tracked
-4. Error from screen center calculated
-5. Error converted to servo angles (0–180°)
+1. Webcam captures video frames
+2. MediaPipe detects facial landmarks
+3. Nose tip is tracked (landmark 1)
+4. Error from screen center is calculated
+5. Error is converted to servo angles (0–180°)
 6. Python sends angles via Serial to Arduino
-7. Arduino moves the servos smoothly
+7. Arduino moves servos smoothly in response
 
 ---
 
@@ -130,33 +128,29 @@ face-tracking-pan-tilt/
 
 ---
 
-## 👨‍💻 **Author & Company**
+## 👨‍💻 **About Me**
 
-**Benayas Wondwosen (Benu)**
-Embedded Systems | Robotics | AI & Python
+**Benayas Wondwosen (Benu)** – Embedded Systems & Robotics Developer
+Founder of **Nafiyas Solution**, specializing in:
 
-**Nafiyas Solution** – Smart Automation & Robotics Solutions
+* Smart automation systems
+* Robotics & AI projects
+* IoT device integration
+* Educational technology
+
+I design and implement **innovative robotics solutions** combining hardware and software for real-world applications.
 
 ---
 
 ## 🤖 **Project Assistant**
 
-**Nafkot (AI)** – Assisted in code generation, smoothing logic, and professional documentation.
+**Nafkot (AI)** – Helped with **code generation, smooth servo logic, and documentation**.
 
 ---
 
 ## 📜 **License**
 
-This project is **open-source** for learning, research, and personal use.
+Open-source for learning, research, and personal projects.
 Commercial use requires permission from **Nafiyas Solution**.
-
----
-
-## 💡 **Future Enhancements**
-
-* Multi-face tracking
-* Voice control integration
-* Web interface for remote servo control
-* IoT-enabled smart automation
 
 ---
