@@ -1,0 +1,96 @@
+"""
+Face Tracking Pan-Tilt System
+Author: Benayas Wondwosen (Benu)
+Description:
+    Real-time head tracking system using MediaPipe FaceMesh + OpenCV.
+    Computes nose position, converts to servo angles, and sends to Arduino.
+"""
+
+import cv2
+import mediapipe as mp
+import serial
+import time
+
+# Connect Arduino
+arduino = serial.Serial('COM4', 9600)  # Fix removed extra space in COM4
+time.sleep(2)
+
+# Face Mesh model
+mp_face = mp.solutions.face_mesh
+face_mesh = mp_face.FaceMesh(refine_landmarks=True)
+
+cap = cv2.VideoCapture(0)
+
+# Servo angles
+servo_x = 90  # left/right
+servo_y = 90  # up/down
+
+target_x = 90
+target_y = 90
+
+# ⚡ SETTINGS
+GAIN_X = 0.28
+GAIN_Y = 0.28
+JUMP_FACTOR = 2.5
+MIN_JUMP = 5
+SMOOTH = 0.25  # smooth movement
+
+while True:
+    ret, frame = cap.read()
+    if not ret:
+        continue
+
+    h, w, _ = frame.shape
+    rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+    results = face_mesh.process(rgb)
+
+    if results.multi_face_landmarks:
+        lm = results.multi_face_landmarks[0].landmark
+
+        nose_x = int(lm[1].x * w)
+        nose_y = int(lm[1].y * h)
+
+        center_x = w // 2
+        center_y = h // 2
+
+        # REVERSED ERROR (correct movement)
+        error_x = center_x - nose_x
+        error_y = center_y - nose_y
+
+        # BIG JUMP ANGLE (fast response)
+        if abs(error_x) > MIN_JUMP:
+            target_x = 90 - (error_x * GAIN_X * JUMP_FACTOR)
+        else:
+            target_x = 90
+
+        if abs(error_y) > MIN_JUMP:
+            target_y = 90 - (error_y * GAIN_Y * JUMP_FACTOR)
+        else:
+            target_y = 90
+
+        # Clamp 0–180
+        target_x = max(0, min(180, target_x))
+        target_y = max(0, min(180, target_y))
+
+        # Smooth movement
+        servo_x += (target_x - servo_x) * SMOOTH
+        servo_y += (target_y - servo_y) * SMOOTH
+
+        # Send to Arduino as "X,Y\n"
+        arduino.write(f"{int(servo_x)},{int(servo_y)}\n".encode())
+
+        # UI
+        cv2.putText(frame, f"X: {int(servo_x)}  Y: {int(servo_y)}",
+                    (20, 40), cv2.FONT_HERSHEY_SIMPLEX,
+                    1, (0, 255, 0), 2)
+
+        cv2.circle(frame, (nose_x, nose_y), 6, (0, 255, 0), -1)
+        cv2.line(frame, (center_x, 0), (center_x, h), (0, 255, 0), 1)
+        cv2.line(frame, (0, center_y), (w, center_y), (0, 255, 0), 1)
+
+    cv2.imshow("Benu Pan-Tilt Head Tracking", frame)
+    if cv2.waitKey(1) == ord('q'):
+        break
+
+cap.release()
+cv2.destroyAllWindows()
