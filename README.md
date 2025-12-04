@@ -4,6 +4,7 @@
 # 🛰️ **Face Tracking Pan–Tilt System**
 
 **Author:** Benayas Wondwosen (Benu)
+
 **Company:** Nafiyas Solution – Smart Automation & Robotics
 
 ![Project Banner](https://img.shields.io/badge/Face_Tracking-Pan-Tilt-blue?style=for-the-badge)
